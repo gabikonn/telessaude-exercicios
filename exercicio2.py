@@ -1,7 +1,10 @@
 num = int(input('Digite um número: '))
 
 if num%2==0:
-    print('O número', num, 'é par')
+    if num%4==0:
+        print('O número', num,'é par e múltiplo de 4')
+    else:
+        print('O número', num, 'é par')
 else:
     print('O número',num, 'é ímpar')
 

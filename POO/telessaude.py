@@ -58,11 +58,12 @@ def validaEmail(email):
     return email
 
 
-u1 = Usuario(1, "Gabi", "blabla@email.com", "03944319010", "13/03/2020",
-             "ativo")
-u2 = Usuario(2, "Maria", "teste@email.com", "12345678912", "13/03/2020",
-             "ativo")
-# print(u1, "\n", u2)
+usuario = []
+usuario.append(Usuario(1, "Gabi", "blabla@email.com", "03944319010",
+                       "13/03/2020", "ativo"))
+usuario.append(Usuario(2, "Maria", "teste@email.com", "12345678912",
+                       "13/03/2020", "ativo"))
+# print(usuario1, "\n", usuario2)
 
 
 def teleConsultoria(ide, teleconsultor, solicitante, dadosCaso, dataInicio,
@@ -72,11 +73,12 @@ def teleConsultoria(ide, teleconsultor, solicitante, dadosCaso, dataInicio,
     return tele
 
 
-tele1 = teleConsultoria(1, u1, u2, "febre", "01/01/2020", "02/01/2020",
-                        "cancelado")
-tele2 = teleConsultoria(2, u1, u2, "teste", "15/03/2020", "16/03/2020",
-                        "em espera")
-print(tele1, "\n", tele2)
+tele = []
+tele.append(teleConsultoria(1, usuario[0], usuario[1], "febre", "01/01/2020",
+                            "02/01/2020", "cancelado"))
+tele.append(teleConsultoria(2, usuario[0], usuario[1], "teste", "15/03/2020",
+                            "16/03/2020", "em espera"))
+# print(tele1, "\n", tele2)
 
 
 class Unidade(object):
@@ -96,10 +98,10 @@ class Unidade(object):
 class UsuarioUnidade(object):
     PERFIL_LIST = ['monitor', 'solicitante', 'teleconsultor']
 
-    def __init__(self, ide, ideUsuario, ideUnidade, perfil):
+    def __init__(self, ide, usuario, unidade, perfil):
         self.ide = ide
-        self.ideUsuario = ideUsuario
-        self.ideUnidade = ideUnidade
+        self.usuario = usuario
+        self.unidade = unidade
         self.perfil = perfil
         self.validaPerfil()
 
@@ -107,15 +109,16 @@ class UsuarioUnidade(object):
         assert self.perfil in self.PERFIL_LIST
 
 
-provedora = Unidade(2, 7654321, "Provedora", "Porto Alegre", "RS",
-                    "1111111111", "Telessaúde", "ativo")
 consumidora = Unidade(1, 1234567, "Consumidora", "Porto Alegre", "RS",
                       "9999999999", "Unidade Básica", "ativo")
-# print(unidade1)
 
-teleconsultor = UsuarioUnidade(2, 2, 2, 'teleconsultor')
-print(teleconsultor)
-solicitante = UsuarioUnidade(1, 1, 1, 'solicitante')
+provedora = Unidade(2, 7654321, "Provedora", "Porto Alegre", "RS",
+                    "1111111111", "Telessaúde", "ativo")
+# print(consumidora)
+
+userUnidade = []
+userUnidade.append(UsuarioUnidade(1, usuario[0], consumidora, 'solicitante'))
+userUnidade.append(UsuarioUnidade(2, usuario[1], provedora, 'teleconsultor'))
 
 
 def teleConsultoria2(ide, teleconsultor, solicitante, dadosCaso, dataInicio,
@@ -125,7 +128,20 @@ def teleConsultoria2(ide, teleconsultor, solicitante, dadosCaso, dataInicio,
     return tele
 
 
-teleConsultoria2(2, teleconsultor, solicitante, "Teste", "01/01/2020",
-                 "02/01/2020", "em espera")
-print(teleConsultoria2)
-# def usuarioUnidade(idUsuario, idUnidade, perfil):
+tele3 = teleConsultoria2(2, userUnidade[1], userUnidade[0], "Teste",
+                         "01/01/2020", "02/01/2020", "em atendimento")
+print(tele3)
+
+
+def encontraUsuarioUnidade(ide, usuario, unidade, perfil):
+    userUnidade = UsuarioUnidade(ide, usuario, unidade, perfil)
+    return userUnidade
+
+
+userUnidade1 = encontraUsuarioUnidade(1, usuario[0], provedora, 'solicitante')
+print(userUnidade1)
+
+
+# def encontraPerfil(ide):
+#    return [x.perfil for x in userUnidade if x.idUsuario == ide]
+#    return a

@@ -1,0 +1,24 @@
+Banco "Sample Dataset" 
+1. Crie uma consulta que retorna o ID de cada pedido (“Orders”), assim como o nome do produto e da pessoa responsável.
+
+select ORDERS.ID AS "Pedido", PEOPLE.NAME AS "Cliente", PRODUCTS.TITLE  AS "Produto" from ORDERS
+join PEOPLE on ORDERS.USER_ID = PEOPLE.ID  >>> no join: colunas que ambos possuem em comum
+join PRODUCTS on ORDERS.PRODUCT_ID = PRODUCTS.ID
+
+2. Crie um relatório em .csv dos 5 produtos com as melhores reviews, e o e-mail do usuário que deixou a review.
+
+select REVIEWS.RATING, REVIEWS.REVIEWER, PRODUCTS.TITLE
+from REVIEWS
+join PRODUCTS on REVIEWS.PRODUCT_ID = PRODUCTS.ID
+order by REVIEWS.RATING desc limited 5
+
+Banco “telessaude-qa”
+3. Crie uma consulta que retorne os nomes de todos os solicitantes.
+
+select accounts_usuario.nome, teleconsultoria_usuariounidade.solicitante
+from teleconsultoria_usuariounidade
+join accounts_usuario on teleconsultoria_usuariounidade.usuario_id = accounts_usuario.id
+where teleconsultoria_usuariounidade.solicitante = true
+
+4. Crie um relatório em .csv que retorna o número de teleconsultorias dos últimos 5 meses.
+

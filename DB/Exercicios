@@ -10,7 +10,7 @@ join PRODUCTS on ORDERS.PRODUCT_ID = PRODUCTS.ID
 select REVIEWS.RATING, REVIEWS.REVIEWER, PRODUCTS.TITLE
 from REVIEWS
 join PRODUCTS on REVIEWS.PRODUCT_ID = PRODUCTS.ID
-order by REVIEWS.RATING desc limited 5
+order by REVIEWS.RATING desc limit 5
 
 Banco “telessaude-qa”
 3. Crie uma consulta que retorne os nomes de todos os solicitantes.
@@ -22,3 +22,5 @@ where teleconsultoria_usuariounidade.solicitante = true
 
 4. Crie um relatório em .csv que retorna o número de teleconsultorias dos últimos 5 meses.
 
+select count(datahora_finalizacao) from teleconsultoria_teleconsultoriatelefonica
+where datahora_finalizacao between ('2019-11-19') and ('2020-03-19') 
